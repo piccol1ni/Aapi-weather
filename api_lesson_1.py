@@ -1,9 +1,16 @@
 import requests
 
-url = 'https://wttr.in/san%20francisco?nTqu&lang=en'
-response = requests.get(url)
 
-if not response.ok:
-    raise requests.exceptions.HTTPError(response=response)
+wttr_articles = ['Лондон', 'Шереметьево', 'Череповец']
 
-print(response.text)
+for article in wttr_articles:
+    url = 'https://wttr.in/{}?nTqM&lang=ru'.format(article)
+
+    response = requests.get(url)
+    print(url)
+
+
+    if not response.ok:
+        raise requests.exceptions.HTTPError(response=response)
+
+    print(response.text)

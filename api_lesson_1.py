@@ -1,16 +1,26 @@
 import requests
 
 
-wttr_articles = ['Лондон', 'Шереметьево', 'Череповец']
-
-for article in wttr_articles:
-    url = 'https://wttr.in/{}?nTqM&lang=ru'.format(article)
-
-    response = requests.get(url)
-    print(url)
+places = ['Лондон', 'Шереметьево', 'Череповец']
 
 
-    if not response.ok:
-        raise requests.exceptions.HTTPError(response=response)
+def main():
+    payloads = {
+        'lang' : 'ru',
+        'nTqM' : '',
+    }
 
-    print(response.text)
+    for place in places:
+        url = 'https://wttr.in/{}'.format(place)
+
+        response = requests.get(url, params=payloads)
+
+        if not response.ok:
+            raise requests.exceptions.HTTPError(response=response)
+
+        print(response.text)
+
+
+
+if __name__ == '__main__':
+    main()

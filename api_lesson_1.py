@@ -3,7 +3,6 @@ import requests
 
 places = ['Лондон', 'Шереметьево', 'Череповец']
 
-
 def main():
     payloads = {
         'lang' : 'ru',
@@ -14,13 +13,9 @@ def main():
         url = 'https://wttr.in/{}'.format(place)
 
         response = requests.get(url, params=payloads)
-
-        if not response.ok:
-            raise requests.exceptions.HTTPError(response=response)
+        response.raise_for_status()
 
         print(response.text)
-
-
 
 if __name__ == '__main__':
     main()
